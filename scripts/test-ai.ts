@@ -1,3 +1,9 @@
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Load .env.local
+dotenv.config({ path: path.join(__dirname, '../.env.local') });
+
 import { generateQuestions } from '../lib/ai/generateQuestions';
 import { critiqueQuestions } from '../lib/ai/critiqueQuestions';
 

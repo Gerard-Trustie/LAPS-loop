@@ -441,7 +441,7 @@ lapsloop/
 
 ### Tasks
 
-- [ ] **2.1: Create OpenAI Client**
+- [x] **2.1: Create OpenAI Client**
   - Create `lib/ai/openai.ts`:
   ```typescript
   import OpenAI from 'openai'
@@ -452,7 +452,7 @@ lapsloop/
   ```
   - Commit: `ai: create OpenAI client`
 
-- [ ] **2.2: Create Prompt Templates**
+- [x] **2.2: Create Prompt Templates**
   - Create `lib/ai/prompts.ts` with:
     - `QUESTION_GENERATOR_PROMPT`
     - `QUESTION_CRITIC_PROMPT`
@@ -460,7 +460,7 @@ lapsloop/
   - Reference PRD for exact prompts
   - Commit: `ai: add prompt templates`
 
-- [ ] **2.3: Create Question Generator**
+- [x] **2.3: Create Question Generator**
   - Create `lib/ai/generateQuestions.ts`:
   ```typescript
   export async function generateQuestions(
@@ -473,7 +473,7 @@ lapsloop/
   - Returns array of questions with scores
   - Commit: `ai: implement question generator`
 
-- [ ] **2.4: Create Question Critic**
+- [x] **2.4: Create Question Critic**
   - Create `lib/ai/critiqueQuestions.ts`:
   ```typescript
   export async function critiqueQuestions(
@@ -484,7 +484,7 @@ lapsloop/
   - Returns scores and issues
   - Commit: `ai: implement question critic`
 
-- [ ] **2.5: Create Pain Analyzer**
+- [x] **2.5: Create Pain Analyzer**
   - Create `lib/ai/analyzePain.ts`:
   ```typescript
   export async function analyzePainSignals(
@@ -495,7 +495,7 @@ lapsloop/
   - Returns signal strength, frequency, quotes
   - Commit: `ai: implement pain analyzer`
 
-- [ ] **2.6: Test AI Functions**
+- [x] **2.6: Test AI Functions**
   - Create `scripts/test-ai.ts`
   - Test question generation with sample data
   - Test critique with sample questions

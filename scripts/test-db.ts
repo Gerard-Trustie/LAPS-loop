@@ -1,3 +1,9 @@
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Load .env.local
+dotenv.config({ path: path.join(__dirname, '../.env.local') });
+
 import { prisma } from '@/lib/db/prisma';
 
 async function main() {
