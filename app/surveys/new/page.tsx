@@ -65,7 +65,7 @@ export default function NewSurveyPage() {
             onClick={() => setStep('form')}
             className="text-blue-600 hover:text-blue-700 mb-6 flex items-center gap-2"
           >
-            ê Back to form
+            &larr; Back to form
           </button>
 
           <div className="bg-white rounded-lg shadow p-8 mb-6">
