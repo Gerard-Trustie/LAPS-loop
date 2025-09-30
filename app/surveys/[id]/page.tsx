@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { getSurveyById } from '@/app/actions/surveys';
 import { exportResponsesCSV } from '@/app/actions/responses';
 import { analyzeSurvey } from '@/app/actions/analysis';
+import { ResponseList } from '@/components/ResponseList';
 
 export default function SurveyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -12,6 +13,7 @@ export default function SurveyDetailPage({ params }: { params: Promise<{ id: str
   const [loading, setLoading] = useState(true);
   const [analyzing, setAnalyzing] = useState(false);
   const [error, setError] = useState('');
+  const [showResponses, setShowResponses] = useState(false);
 
   const loadSurvey = async () => {
     const data = await getSurveyById(id);
@@ -124,6 +126,19 @@ export default function SurveyDetailPage({ params }: { params: Promise<{ id: str
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-8 mb-6">
+          <h2 className="text-2xl font-semibold mb-6">Responses ({responseCount})</h2>
+          {responseCount > 0 && (
+            <button
+              onClick={() => setShowResponses(!showResponses)}
+              className="mb-4 text-blue-600 hover:text-blue-700 font-medium"
+            >
+              {showResponses ? 'Hide Responses' : 'View Responses'}
+            </button>
+          )}
+          {showResponses && <ResponseList responses={survey.responses || []} />}
         </div>
 
         <div className="bg-white rounded-lg shadow p-8 mb-6">
