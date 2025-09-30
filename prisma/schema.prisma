@@ -1,15 +1,50 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Survey {
+  id             String     @id @default(uuid())
+  title          String
+  audience       String
+  hypothesis     String
+  questions      Json
+  completionCode String     @unique @map("completion_code")
+  createdAt      DateTime   @default(now()) @map("created_at")
+  responses      Response[]
+  analysis       Analysis?
+
+  @@map("surveys")
+}
+
+model Response {
+  id          String   @id @default(uuid())
+  surveyId    String   @map("survey_id")
+  answers     Json
+  prolificPid String?  @map("prolific_pid")
+  completedAt DateTime @default(now()) @map("completed_at")
+  survey      Survey   @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+
+  @@map("responses")
+}
+
+model Analysis {
+  id                  String   @id @default(uuid())
+  surveyId            String   @unique @map("survey_id")
+  signalStrength      String   @map("signal_strength")
+  painFrequency       Int      @map("pain_frequency")
+  painIntensity       String   @map("pain_intensity")
+  keyQuotes           Json     @map("key_quotes")
+  currentWorkarounds  Json     @map("current_workarounds")
+  recommendation      String
+  confidence          String
+  reasoning           String
+  createdAt           DateTime @default(now()) @map("created_at")
+  survey              Survey   @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+
+  @@map("analyses")
 }
