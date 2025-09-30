@@ -18,13 +18,15 @@ Generate 8 questions that:
 - Ask about money/time they've spent on this problem
 - Explore workarounds they've tried
 
-Return ONLY a JSON array of objects with this structure:
-[
-  {
-    "text": "question text",
-    "rationale": "why this question follows Mom Test principles"
-  }
-]`;
+Return ONLY a JSON object with this structure:
+{
+  "questions": [
+    {
+      "text": "question text",
+      "rationale": "why this question follows Mom Test principles"
+    }
+  ]
+}`;
 
 export const QUESTION_CRITIC_PROMPT = `You are an expert at evaluating customer discovery questions using the Mom Test framework.
 
@@ -44,14 +46,16 @@ Questions to evaluate:
 
 For each question, return a score (0-100) and list of issues.
 
-Return ONLY a JSON array with this structure:
-[
-  {
-    "text": "original question",
-    "score": 85,
-    "issues": ["leading"] or []
-  }
-]`;
+Return ONLY a JSON object with this structure:
+{
+  "critiques": [
+    {
+      "text": "original question",
+      "score": 85,
+      "issues": ["leading"] or []
+    }
+  ]
+}`;
 
 export const PAIN_ANALYZER_PROMPT = `You are an expert at analyzing customer research responses to identify genuine pain signals.
 

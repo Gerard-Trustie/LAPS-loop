@@ -34,10 +34,18 @@ export async function generateQuestions(
 
     const content = response.choices[0]?.message?.content;
     if (!content) {
+      console.error('No content in OpenAI response');
       throw new Error('No response from OpenAI');
     }
 
-    // Parse the response - it should be { "questions": [...] } or just [...]
+    // Log token usage for cost tracking
+    console.log('[Question Generation] Tokens used:', {
+      prompt: response.usage?.prompt_tokens,
+      completion: response.usage?.completion_tokens,
+      total: response.usage?.total_tokens,
+    });
+
+    // Parse the response - should be { "questions": [...] }
     let parsed;
     try {
       parsed = JSON.parse(content);
@@ -46,10 +54,15 @@ export async function generateQuestions(
       throw new Error('Invalid JSON response from OpenAI');
     }
 
-    // Handle both formats: { "questions": [...] } or just [...]
-    const questions: GeneratedQuestion[] = Array.isArray(parsed) 
-      ? parsed 
-      : parsed.questions || [];
+    // Extract questions array
+    const questions: GeneratedQuestion[] = parsed.questions || [];
+
+    if (!Array.isArray(questions) || questions.length === 0) {
+      console.error('No questions in parsed response:', parsed);
+      throw new Error('OpenAI returned no questions. Response structure: ' + JSON.stringify(parsed));
+    }
+
+    console.log(`[Question Generation] Generated ${questions.length} questions`);
 
     // Convert to Question format (we'll score them in the next step)
     return questions.map((q) => ({

@@ -34,8 +34,16 @@ export async function critiqueQuestions(
 
     const content = response.choices[0]?.message?.content;
     if (!content) {
+      console.error('No content in OpenAI response');
       throw new Error('No response from OpenAI');
     }
+
+    // Log token usage for cost tracking
+    console.log('[Question Critique] Tokens used:', {
+      prompt: response.usage?.prompt_tokens,
+      completion: response.usage?.completion_tokens,
+      total: response.usage?.total_tokens,
+    });
 
     let parsed;
     try {
@@ -45,10 +53,15 @@ export async function critiqueQuestions(
       throw new Error('Invalid JSON response from OpenAI');
     }
 
-    // Handle both formats: { "critiques": [...] } or just [...]
-    const critiques: CritiqueResult[] = Array.isArray(parsed) 
-      ? parsed 
-      : parsed.critiques || parsed.questions || [];
+    // Extract critiques array - should be { "critiques": [...] }
+    const critiques: CritiqueResult[] = parsed.critiques || [];
+
+    if (!Array.isArray(critiques) || critiques.length === 0) {
+      console.error('No critiques in parsed response:', parsed);
+      throw new Error('OpenAI returned no critiques. Response structure: ' + JSON.stringify(parsed));
+    }
+
+    console.log(`[Question Critique] Critiqued ${critiques.length} questions`);
 
     // Merge critique results with original questions
     return questions.map((q, i) => ({
