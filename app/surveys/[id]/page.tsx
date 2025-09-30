@@ -51,7 +51,7 @@ export default function SurveyDetailPage({ params }: { params: { id: string } })
 
     try {
       await analyzeSurvey(params.id);
-      await loadSurvey(); // Reload to show analysis
+      await loadSurvey();
     } catch (err: any) {
       setError(err.message || 'Failed to analyze survey');
       console.error(err);
@@ -83,10 +83,9 @@ export default function SurveyDetailPage({ params }: { params: { id: string } })
     <main className="min-h-screen p-8 bg-gray-50">
       <div className="max-w-6xl mx-auto">
         <Link href="/" className="text-blue-600 hover:text-blue-700 mb-6 inline-block">
-          � Back to Dashboard
+          Back to Dashboard
         </Link>
 
-        {/* Survey Header */}
         <div className="bg-white rounded-lg shadow p-8 mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">{survey.title}</h1>
           <div className="grid grid-cols-2 gap-6 mb-6">
@@ -101,14 +100,13 @@ export default function SurveyDetailPage({ params }: { params: { id: string } })
           </div>
           <div className="flex gap-4 text-sm text-gray-500">
             <span>{responseCount} responses</span>
-            <span>"</span>
+            <span>•</span>
             <span>Created {new Date(survey.createdAt).toLocaleDateString()}</span>
-            <span>"</span>
+            <span>•</span>
             <span className="font-mono">{survey.completionCode}</span>
           </div>
         </div>
 
-        {/* Questions */}
         <div className="bg-white rounded-lg shadow p-8 mb-6">
           <h2 className="text-2xl font-semibold mb-6">Questions</h2>
           <div className="space-y-4">
@@ -127,7 +125,6 @@ export default function SurveyDetailPage({ params }: { params: { id: string } })
           </div>
         </div>
 
-        {/* Actions */}
         <div className="bg-white rounded-lg shadow p-8 mb-6">
           <h2 className="text-2xl font-semibold mb-6">Actions</h2>
           <div className="flex gap-4">
@@ -159,7 +156,6 @@ export default function SurveyDetailPage({ params }: { params: { id: string } })
           )}
         </div>
 
-        {/* Analysis Results */}
         {survey.analysis && (
           <div className="bg-white rounded-lg shadow p-8">
             <h2 className="text-2xl font-semibold mb-6">Pain Signal Analysis</h2>
@@ -197,7 +193,7 @@ export default function SurveyDetailPage({ params }: { params: { id: string } })
                 <div className="space-y-2">
                   {(survey.analysis.keyQuotes as string[]).map((quote, i) => (
                     <div key={i} className="pl-4 border-l-4 border-blue-500 py-2">
-                      <p className="text-gray-700 italic">&ldquo;{quote}&rdquo;</p>
+                      <p className="text-gray-700 italic">{quote}</p>
                     </div>
                   ))}
                 </div>
@@ -227,7 +223,7 @@ export default function SurveyDetailPage({ params }: { params: { id: string } })
               <div className="pt-4 border-t">
                 <p className="text-sm text-gray-500">
                   Confidence: <span className="font-medium capitalize">{survey.analysis.confidence}</span>
-                  {' " '}
+                  {' • '}
                   Analyzed on {new Date(survey.analysis.createdAt).toLocaleDateString()}
                 </p>
               </div>
