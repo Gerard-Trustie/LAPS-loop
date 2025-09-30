@@ -46,7 +46,7 @@ lapsloop/
 
 ### Tasks
 
-- [ ] **0.1: Initialize Next.js Project**
+- [x] **0.1: Initialize Next.js Project**
   ```bash
   npx create-next-app@latest lapsloop --typescript --tailwind --app --no-src-dir
   cd lapsloop
@@ -55,7 +55,7 @@ lapsloop/
   - Select: TypeScript (yes), ESLint (yes), Tailwind (yes), App Router (yes)
   - Commit: `chore: initialize Next.js project`
 
-- [ ] **0.2: Install Dependencies**
+- [x] **0.2: Install Dependencies**
   ```bash
   npm install openai zod @prisma/client
   npm install -D prisma
@@ -69,14 +69,14 @@ lapsloop/
   - Add `.env*.local` to `.gitignore`
   - Commit: `chore: install dependencies`
 
-- [ ] **0.3: Initialize Prisma**
+- [x] **0.3: Initialize Prisma**
   ```bash
   npx prisma init
   ```
   - Update `prisma/schema.prisma` with database URL
   - Commit: `chore: initialize Prisma`
 
-- [ ] **0.4: Create Directory Structure**
+- [x] **0.4: Create Directory Structure**
   ```bash
   mkdir -p docs/{reference,best-practices}
   mkdir -p app/api/surveys
@@ -84,7 +84,7 @@ lapsloop/
   ```
   - Commit: `chore: create directory structure`
 
-- [ ] **0.5: Create docs/reference/tech-stack.md**
+- [x] **0.5: Create docs/reference/tech-stack.md**
   ```markdown
   # Tech Stack - LAPSloop MVP
 
@@ -115,7 +115,7 @@ lapsloop/
   ```
   - Commit: `docs: add tech stack reference`
 
-- [ ] **0.6: Create docs/reference/data-model.md**
+- [x] **0.6: Create docs/reference/data-model.md**
   ```markdown
   # Data Model - LAPSloop MVP
 
@@ -160,7 +160,7 @@ lapsloop/
   ```
   - Commit: `docs: add data model reference`
 
-- [ ] **0.7: Create docs/reference/architecture-decisions.md**
+- [x] **0.7: Create docs/reference/architecture-decisions.md**
   ```markdown
   # Architecture Decision Records - LAPSloop
 
@@ -267,7 +267,7 @@ lapsloop/
   ```
   - Commit: `docs: add architecture decisions`
 
-- [ ] **0.8: Create docs/reference/memory.md**
+- [x] **0.8: Create docs/reference/memory.md**
   ```markdown
   # Project Memory - LAPSloop
 
@@ -315,13 +315,13 @@ lapsloop/
   ```
   - Commit: `docs: add project memory`
 
-- [ ] **0.9: Copy Best Practices from Trustie Website**
+- [x] **0.9: Copy Best Practices from Trustie Website**
   - Copy effective-llm-usage.md from Trustie Website to docs/best-practices/
   - Path: `/Users/gerard/GitHub/Trustie Website/trustie-website/docs/best-practices/effective-llm-usage.md`
   - If path doesn't exist, skip this task (not critical for MVP)
   - Commit: `docs: add LLM best practices` (if copied)
 
-- [ ] **0.10: Create/Update CLAUDE.md**
+- [x] **0.10: Create/Update CLAUDE.md**
   ```markdown
   # LAPSloop Project Context for Claude
 
@@ -375,12 +375,12 @@ lapsloop/
 
 ### Tasks
 
-- [ ] **1.1: Create Prisma Schema**
+- [x] **1.1: Create Prisma Schema**
   - Edit `prisma/schema.prisma` with surveys, responses, analyses tables
   - Reference: docs/reference/data-model.md for exact schema
   - Commit: `db: create Prisma schema`
 
-- [ ] **1.2: Create Prisma Client Singleton**
+- [x] **1.2: Create Prisma Client Singleton**
   - Create `lib/db/prisma.ts`:
   ```typescript
   import { PrismaClient } from '@prisma/client'
@@ -395,25 +395,25 @@ lapsloop/
   ```
   - Commit: `db: add Prisma client singleton`
 
-- [ ] **1.3: Push Schema to Railway**
+- [x] **1.3: Push Schema to Railway**
   ```bash
   npx prisma db push
   ```
   - Verify tables created in Railway dashboard
   - Commit: `db: push initial schema`
 
-- [ ] **1.4: Generate Prisma Client**
+- [x] **1.4: Generate Prisma Client**
   ```bash
   npx prisma generate
   ```
   - Commit: `db: generate Prisma client`
 
-- [ ] **1.5: Create TypeScript Types**
+- [x] **1.5: Create TypeScript Types**
   - Create `lib/types.ts` with interfaces matching Prisma models
   - Add helper types (SurveyWithResponses, etc.)
   - Commit: `types: add TypeScript interfaces`
 
-- [ ] **1.6: Test Database Connection**
+- [x] **1.6: Test Database Connection**
   - Create `scripts/test-db.ts`:
   ```typescript
   import { prisma } from '@/lib/db/prisma'
