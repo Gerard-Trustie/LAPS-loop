@@ -1,24 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getSurveyById } from '@/app/actions/surveys';
 
-export default function SurveyCreatedPage({ params }: { params: { id: string } }) {
+export default function SurveyCreatedPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [survey, setSurvey] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState<'url' | 'code' | null>(null);
 
   useEffect(() => {
     async function loadSurvey() {
-      const data = await getSurveyById(params.id);
+      const data = await getSurveyById(id);
       setSurvey(data);
       setLoading(false);
     }
     loadSurvey();
-  }, [params.id]);
+  }, [id]);
 
-  const surveyUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/survey/${params.id}`;
+  const surveyUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/survey/${id}`;
 
   const copyToClipboard = async (text: string, type: 'url' | 'code') => {
     await navigator.clipboard.writeText(text);
@@ -106,7 +107,7 @@ export default function SurveyCreatedPage({ params }: { params: { id: string } }
 
           <div className="mt-8 pt-6 border-t flex gap-4">
             <Link
-              href={`/surveys/${params.id}`}
+              href={`/surveys/${id}`}
               className="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition"
             >
               View Survey Details

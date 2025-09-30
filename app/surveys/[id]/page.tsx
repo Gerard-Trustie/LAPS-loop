@@ -1,35 +1,36 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { getSurveyById } from '@/app/actions/surveys';
 import { exportResponsesCSV } from '@/app/actions/responses';
 import { analyzeSurvey } from '@/app/actions/analysis';
 
-export default function SurveyDetailPage({ params }: { params: { id: string } }) {
+export default function SurveyDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [survey, setSurvey] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [analyzing, setAnalyzing] = useState(false);
   const [error, setError] = useState('');
 
   const loadSurvey = async () => {
-    const data = await getSurveyById(params.id);
+    const data = await getSurveyById(id);
     setSurvey(data);
     setLoading(false);
   };
 
   useEffect(() => {
     loadSurvey();
-  }, [params.id]);
+  }, [id]);
 
   const handleExportCSV = async () => {
     try {
-      const csv = await exportResponsesCSV(params.id);
+      const csv = await exportResponsesCSV(id);
       const blob = new Blob([csv], { type: 'text/csv' });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `survey-${params.id}-responses.csv`;
+      a.download = `survey-${id}-responses.csv`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -50,7 +51,7 @@ export default function SurveyDetailPage({ params }: { params: { id: string } })
     setError('');
 
     try {
-      await analyzeSurvey(params.id);
+      await analyzeSurvey(id);
       await loadSurvey();
     } catch (err: any) {
       setError(err.message || 'Failed to analyze survey');
