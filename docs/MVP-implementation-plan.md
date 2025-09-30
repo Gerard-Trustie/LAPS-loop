@@ -568,19 +568,19 @@ lapsloop/
 
 ### Tasks
 
-- [ ] **4.1: Create Dashboard Page**
+- [x] **4.1: Create Dashboard Page**
   - Create `app/page.tsx` (homepage)
   - Shows list of surveys
   - "Create New Survey" button
   - Commit: `ui: add dashboard page`
 
-- [ ] **4.2: Create Survey Creation Form**
+- [x] **4.2: Create Survey Creation Form**
   - Create `app/surveys/new/page.tsx`
   - Form fields: title, audience, hypothesis
   - "Generate Questions" button
   - Commit: `ui: add survey creation form`
 
-- [ ] **4.3: Question Review Component**
+- [x] **4.3: Question Review Component**
   - Create `components/QuestionReview.tsx`
   - Shows generated questions with scores
   - Edit button for each question
@@ -588,7 +588,7 @@ lapsloop/
   - "Create Survey" button
   - Commit: `ui: add question review component`
 
-- [ ] **4.4: Survey Created Success Page**
+- [x] **4.4: Survey Created Success Page**
   - Create `app/surveys/[id]/created/page.tsx`
   - Shows survey URL
   - Shows completion code
@@ -596,7 +596,7 @@ lapsloop/
   - Link to survey detail page
   - Commit: `ui: add survey success page`
 
-- [ ] **4.5: Survey Detail Page**
+- [x] **4.5: Survey Detail Page**
   - Create `app/surveys/[id]/page.tsx`
   - Shows survey info
   - Shows response count
@@ -605,7 +605,7 @@ lapsloop/
   - Shows analysis results (if exists)
   - Commit: `ui: add survey detail page`
 
-- [ ] **4.6: Connect Form to Server Actions**
+- [x] **4.6: Connect Form to Server Actions**
   - Wire up form submission
   - Add loading states
   - Add error handling
