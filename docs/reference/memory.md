@@ -11,9 +11,9 @@ MVP - Week 1-2: Building core features
 - Simple password protection for admin routes (ADR-005)
 
 ## Current Working State
-**Status:** Milestone 0 - Project setup completed
-**Last Milestone:** Milestone 0 (setup)
-**Next Milestone:** Milestone 1 (database setup)
+**Status:** Milestone 5 completed - Public survey form working
+**Last Milestone:** Milestone 5 (public survey form)
+**Next Milestone:** Milestone 6 (response viewing & export)
 
 ## Tables in Use
 - surveys (title, audience, hypothesis, questions, completion_code)
@@ -33,6 +33,7 @@ MVP - Week 1-2: Building core features
 - Remember: Railway Postgres, not SQLite
 - OpenAI model is "gpt-4o" (not gpt-4-turbo)
 - Password stored in ADMIN_PASSWORD env var (add to Vercel settings)
+- Next.js 15: params and searchParams are Promises, must await them in page components
 
 ## OpenAI Usage Patterns
 - Model: "gpt-4o"

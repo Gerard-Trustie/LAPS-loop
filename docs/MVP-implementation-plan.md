@@ -625,7 +625,7 @@ lapsloop/
 
 ### Tasks
 
-- [ ] **5.1: Create Survey Form Page**
+- [x] **5.1: Create Survey Form Page**
   - Create `app/survey/[id]/page.tsx`
   - Fetch survey by ID
   - Display title and questions
@@ -633,26 +633,26 @@ lapsloop/
   - Submit button
   - Commit: `ui: add public survey form`
 
-- [ ] **5.2: Create Completion Page**
+- [x] **5.2: Create Completion Page**
   - Create `app/survey/[id]/complete/page.tsx`
   - Shows "Thank you" message
   - Shows completion code (large, copyable)
   - Instructions to return to Prolific
   - Commit: `ui: add completion page`
 
-- [ ] **5.3: Add Answer Validation**
+- [x] **5.3: Add Answer Validation**
   - Validate min 50 characters per answer
   - Show character count
   - Disable submit until all valid
   - Commit: `ui: add answer validation`
 
-- [ ] **5.4: Connect to Response Actions**
+- [x] **5.4: Connect to Response Actions**
   - Wire up form submission
   - Call submitResponse() Server Action
   - Redirect to completion page
   - Commit: `ui: connect survey submission`
 
-- [ ] **5.5: Test on Mobile**
+- [x] **5.5: Test on Mobile**
   - Test responsive design
   - Test form submission
   - Test character count
