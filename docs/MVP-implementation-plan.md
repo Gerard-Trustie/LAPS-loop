@@ -517,7 +517,7 @@ lapsloop/
 
 ### Tasks
 
-- [ ] **3.1: Create Survey Actions**
+- [x] **3.1: Create Survey Actions**
   - Create `app/actions/surveys.ts`:
   ```typescript
   'use server'
@@ -527,7 +527,7 @@ lapsloop/
   ```
   - Commit: `actions: add survey actions`
 
-- [ ] **3.2: Create Response Actions**
+- [x] **3.2: Create Response Actions**
   - Create `app/actions/responses.ts`:
   ```typescript
   'use server'
@@ -537,7 +537,7 @@ lapsloop/
   ```
   - Commit: `actions: add response actions`
 
-- [ ] **3.3: Create Analysis Actions**
+- [x] **3.3: Create Analysis Actions**
   - Create `app/actions/analysis.ts`:
   ```typescript
   'use server'
@@ -548,7 +548,7 @@ lapsloop/
   - Saves to database
   - Commit: `actions: add analysis actions`
 
-- [ ] **3.4: Add Zod Validation**
+- [x] **3.4: Add Zod Validation**
   - Install zod: `npm install zod`
   - Create `lib/validation/schemas.ts`
   - Add validation schemas for all inputs
