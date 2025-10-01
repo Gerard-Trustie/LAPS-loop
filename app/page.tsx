@@ -18,7 +18,7 @@ export default async function Home() {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900">LAPSloop</h1>
+            <h1 className="text-4xl font-bold text-gray-900">shouldability.ai</h1>
             <p className="text-gray-600 mt-2">AI-powered pain signal detection</p>
           </div>
           <Link
