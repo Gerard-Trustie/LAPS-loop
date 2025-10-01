@@ -1,6 +1,7 @@
 import { notFound, redirect } from 'next/navigation';
 import { getSurveyById } from '@/app/actions/survey-crud';
 import { submitResponse } from '@/app/actions/responses';
+import { generateFakeAnswers } from '@/app/actions/test-helpers';
 import SurveyForm from './SurveyForm';
 
 interface PageProps {
@@ -36,6 +37,18 @@ export default async function SurveyPage({ params, searchParams }: PageProps) {
     redirect(`/survey/${id}/complete`);
   }
 
+  async function handleGenerateFake() {
+    'use server';
+
+    return generateFakeAnswers(
+      questions.map(q => q.text),
+      {
+        audience: survey.audience,
+        hypothesis: survey.hypothesis,
+      }
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-3xl mx-auto">
@@ -45,7 +58,11 @@ export default async function SurveyPage({ params, searchParams }: PageProps) {
             Please answer all questions thoughtfully. Each answer should be at least 50 characters.
           </p>
 
-          <SurveyForm questions={questions.map(q => q.text)} action={handleSubmit} />
+          <SurveyForm
+            questions={questions.map(q => q.text)}
+            action={handleSubmit}
+            onGenerateFakeAnswers={handleGenerateFake}
+          />
         </div>
       </div>
     </div>
