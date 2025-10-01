@@ -711,7 +711,7 @@ lapsloop/
 
 ### Tasks
 
-- [ ] **7.1: Create Analysis Results Component**
+- [x] **7.1: Create Analysis Results Component**
   - Create `components/AnalysisResults.tsx`
   - Signal strength badge (color-coded)
   - Pain frequency percentage
@@ -723,19 +723,19 @@ lapsloop/
   - Reasoning text
   - Commit: `ui: add analysis results component`
 
-- [ ] **7.2: Add to Survey Detail Page**
+- [x] **7.2: Add to Survey Detail Page**
   - Show "Analyze Pain Signals" button when ≥30 responses
   - Show loading state during analysis (30-60s)
   - Display AnalysisResults when complete
   - Commit: `ui: integrate analysis results`
 
-- [ ] **7.3: Add Loading States**
+- [x] **7.3: Add Loading States**
   - Spinner during analysis
   - Progress indicator
   - Disable button during processing
   - Commit: `ui: add analysis loading states`
 
-- [ ] **7.4: Style Results Beautifully**
+- [x] **7.4: Style Results Beautifully**
   - Color code signal strength:
     - Strong: green
     - Weak: yellow

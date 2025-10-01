@@ -4,7 +4,7 @@
   **Context:**
   - Read docs/PRD.md to understand the product goal
   - Read MVP-implementation-plan.md for implementation steps
-  - This is a 2-week MVP to validate: Can AI predict feature success?
+
 
   **Workflow:**
   1. Start with Milestone 0 (Project Setup & Documentation)

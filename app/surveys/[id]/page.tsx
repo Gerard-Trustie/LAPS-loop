@@ -53,8 +53,8 @@ export default function SurveyDetailPage({ params }: { params: Promise<{ id: str
   };
 
   const handleAnalyze = async () => {
-    if (survey.responses.length < 30) {
-      setError('Need at least 30 responses to analyze');
+    if (survey.responses.length === 0) {
+      setError('Need at least 1 response to analyze');
       return;
     }
 
@@ -194,17 +194,24 @@ export default function SurveyDetailPage({ params }: { params: Promise<{ id: str
               Export CSV
             </button>
             {!survey.analysis && (
-              <button
-                onClick={handleAnalyze}
-                disabled={responseCount < 30 || analyzing}
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition"
-              >
-                {analyzing
-                  ? 'Analyzing...'
-                  : responseCount < 30
-                  ? `Analyze (${responseCount}/30 responses)`
-                  : 'Analyze Pain Signals'}
-              </button>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={handleAnalyze}
+                  disabled={responseCount === 0 || analyzing}
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition"
+                >
+                  {analyzing
+                    ? 'Analyzing...'
+                    : responseCount === 0
+                    ? 'Analyze (0 responses)'
+                    : `Analyze Pain Signals (${responseCount} response${responseCount === 1 ? '' : 's'})`}
+                </button>
+                {responseCount > 0 && responseCount < 30 && !analyzing && (
+                  <p className="text-sm text-orange-600">
+                    ⚠️ Low sample size (N={responseCount}). Analysis confidence will be limited. 30+ responses recommended.
+                  </p>
+                )}
+              </div>
             )}
           </div>
           {error && (

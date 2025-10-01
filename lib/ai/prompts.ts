@@ -84,6 +84,13 @@ Analyze the responses for:
 
 6. **Recommendation**: Should we build this? Why or why not?
 
+7. **Confidence Level**: Factor in both response count AND data quality
+   - High: 30+ responses with clear, consistent patterns
+   - Medium: 10-29 responses with some patterns, OR 30+ with mixed signals
+   - Low: <10 responses, OR unclear/inconsistent patterns regardless of count
+
+   IMPORTANT: With fewer responses, be more conservative with confidence.
+
 Return ONLY a JSON object with this structure:
 {
   "signalStrength": "strong" | "weak" | "none",

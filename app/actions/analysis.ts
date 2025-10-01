@@ -15,8 +15,8 @@ export async function analyzeSurvey(surveyId: string): Promise<Analysis> {
     throw new Error('Survey not found');
   }
 
-  if (survey.responses.length < 30) {
-    throw new Error('Need at least 30 responses to analyze');
+  if (survey.responses.length === 0) {
+    throw new Error('Need at least 1 response to analyze');
   }
 
   // Check if analysis already exists

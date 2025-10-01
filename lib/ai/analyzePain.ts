@@ -8,8 +8,8 @@ export async function analyzePainSignals(
   surveyQuestions: Array<{ text: string }>
 ): Promise<AnalysisResult> {
   try {
-    if (responses.length < 30) {
-      throw new Error('Need at least 30 responses for meaningful analysis');
+    if (responses.length === 0) {
+      throw new Error('Need at least 1 response to analyze');
     }
 
     // Format questions
