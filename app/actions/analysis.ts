@@ -19,13 +19,15 @@ export async function analyzeSurvey(surveyId: string): Promise<Analysis> {
     throw new Error('Need at least 1 response to analyze');
   }
 
-  // Check if analysis already exists
+  // Check if analysis already exists and delete it to re-analyze
   const existingAnalysis = await prisma.analysis.findUnique({
     where: { surveyId },
   });
 
   if (existingAnalysis) {
-    return existingAnalysis;
+    await prisma.analysis.delete({
+      where: { surveyId },
+    });
   }
 
   // Analyze pain signals

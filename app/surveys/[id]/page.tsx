@@ -193,26 +193,26 @@ export default function SurveyDetailPage({ params }: { params: Promise<{ id: str
             >
               Export CSV
             </button>
-            {!survey.analysis && (
-              <div className="flex flex-col gap-2">
-                <button
-                  onClick={handleAnalyze}
-                  disabled={responseCount === 0 || analyzing}
-                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition"
-                >
-                  {analyzing
-                    ? 'Analyzing...'
-                    : responseCount === 0
-                    ? 'Analyze (0 responses)'
-                    : `Analyze Pain Signals (${responseCount} response${responseCount === 1 ? '' : 's'})`}
-                </button>
-                {responseCount > 0 && responseCount < 30 && !analyzing && (
-                  <p className="text-sm text-orange-600">
-                    ⚠️ Low sample size (N={responseCount}). Analysis confidence will be limited. 30+ responses recommended.
-                  </p>
-                )}
-              </div>
-            )}
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={handleAnalyze}
+                disabled={responseCount === 0 || analyzing}
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white rounded-lg font-medium transition"
+              >
+                {analyzing
+                  ? 'Analyzing...'
+                  : responseCount === 0
+                  ? 'Analyze (0 responses)'
+                  : survey.analysis
+                  ? `Re-analyze Pain Signals (${responseCount} response${responseCount === 1 ? '' : 's'})`
+                  : `Analyze Pain Signals (${responseCount} response${responseCount === 1 ? '' : 's'})`}
+              </button>
+              {responseCount > 0 && responseCount < 30 && !analyzing && (
+                <p className="text-sm text-orange-600">
+                  ⚠️ Low sample size (N={responseCount}). Analysis confidence will be limited. 30+ responses recommended.
+                </p>
+              )}
+            </div>
           </div>
           {error && (
             <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
@@ -223,7 +223,12 @@ export default function SurveyDetailPage({ params }: { params: Promise<{ id: str
 
         {survey.analysis && (
           <div className="bg-white rounded-lg shadow p-8">
-            <h2 className="text-2xl font-semibold mb-6">Pain Signal Analysis</h2>
+            <div className="flex justify-between items-start mb-6">
+              <h2 className="text-2xl font-semibold">Pain Signal Analysis</h2>
+              <p className="text-sm text-gray-500">
+                Last analyzed: {new Date(survey.analysis.createdAt).toLocaleString()}
+              </p>
+            </div>
 
             <div className="grid grid-cols-3 gap-6 mb-8">
               <div>
