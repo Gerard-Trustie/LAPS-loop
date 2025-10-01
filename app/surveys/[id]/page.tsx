@@ -14,6 +14,7 @@ export default function SurveyDetailPage({ params }: { params: Promise<{ id: str
   const [analyzing, setAnalyzing] = useState(false);
   const [error, setError] = useState('');
   const [showResponses, setShowResponses] = useState(false);
+  const [urlCopied, setUrlCopied] = useState(false);
 
   const loadSurvey = async () => {
     const data = await getSurveyById(id);
@@ -24,6 +25,14 @@ export default function SurveyDetailPage({ params }: { params: Promise<{ id: str
   useEffect(() => {
     loadSurvey();
   }, [id]);
+
+  const surveyUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/survey/${id}`;
+
+  const handleCopyUrl = async () => {
+    await navigator.clipboard.writeText(surveyUrl);
+    setUrlCopied(true);
+    setTimeout(() => setUrlCopied(false), 2000);
+  };
 
   const handleExportCSV = async () => {
     try {
@@ -108,6 +117,39 @@ export default function SurveyDetailPage({ params }: { params: Promise<{ id: str
             <span>•</span>
             <span className="font-mono">{survey.completionCode}</span>
           </div>
+        </div>
+
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-3">Public Survey Link</h2>
+          <div className="flex gap-2 mb-2">
+            <input
+              type="text"
+              value={surveyUrl}
+              readOnly
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg bg-white"
+            />
+            <button
+              onClick={handleCopyUrl}
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition"
+            >
+              {urlCopied ? 'Copied!' : 'Copy URL'}
+            </button>
+          </div>
+          <div className="flex gap-4">
+            <Link
+              href={`/survey/${id}`}
+              target="_blank"
+              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              Open Survey (Preview)
+            </Link>
+          </div>
+          <p className="text-sm text-gray-600 mt-3">
+            Share this link with participants on Prolific or other platforms
+          </p>
         </div>
 
         <div className="bg-white rounded-lg shadow p-8 mb-6">
