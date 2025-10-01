@@ -31,6 +31,9 @@ Use the Playwright MCP to test UI changes.
   
 ## Project Patterns
 - Use Server Actions for data mutations (NOT REST APIs)
+- **Server Actions are split into two files:**
+  - `app/actions/survey-crud.ts` - Database CRUD operations (no AI/OpenAI imports)
+  - `app/actions/surveys.ts` - AI-powered operations (uses OpenAI)
 - Prisma for database access
 - OpenAI direct API calls (no LangChain)
 - No authentication system (single admin user)
@@ -41,6 +44,10 @@ Use the Playwright MCP to test UI changes.
 - Don't create /api routes (use Server Actions instead)
 - Don't use SQLite (we use Postgres from day 1)
 - Model name is "gpt-4o" not "gpt-4-turbo"
+- **CRITICAL:** Never import from `surveys.ts` in public pages (survey forms)
+  - Public pages (`/survey/[id]`) must ONLY import from `survey-crud.ts`
+  - This prevents OpenAI from being bundled in client-side code
+  - If you get "Cannot find module openai.js" errors, check your imports
 
 
 

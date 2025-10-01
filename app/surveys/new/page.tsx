@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { generateSurveyQuestions, createSurvey } from '@/app/actions/surveys';
+import { generateSurveyQuestions } from '@/app/actions/surveys';
+import { createSurvey } from '@/app/actions/survey-crud';
 import { Question } from '@/lib/types';
 
 export default function NewSurveyPage() {

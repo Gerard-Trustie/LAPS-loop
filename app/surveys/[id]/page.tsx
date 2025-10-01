@@ -2,7 +2,7 @@
 
 import { use, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getSurveyById } from '@/app/actions/surveys';
+import { getSurveyById } from '@/app/actions/survey-crud';
 import { exportResponsesCSV } from '@/app/actions/responses';
 import { analyzeSurvey } from '@/app/actions/analysis';
 import { ResponseList } from '@/components/ResponseList';

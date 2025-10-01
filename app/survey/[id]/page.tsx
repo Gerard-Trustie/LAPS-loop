@@ -1,5 +1,5 @@
 import { notFound, redirect } from 'next/navigation';
-import { getSurveyById } from '@/app/actions/surveys';
+import { getSurveyById } from '@/app/actions/survey-crud';
 import { submitResponse } from '@/app/actions/responses';
 import SurveyForm from './SurveyForm';
 

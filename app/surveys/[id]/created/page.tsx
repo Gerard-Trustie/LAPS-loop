@@ -2,7 +2,7 @@
 
 import { use, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getSurveyById } from '@/app/actions/surveys';
+import { getSurveyById } from '@/app/actions/survey-crud';
 
 export default function SurveyCreatedPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);

@@ -21,8 +21,10 @@ MVP - Week 1-2: Building core features
 - analyses (survey_id, signal_strength, pain_frequency, key_quotes, etc.)
 
 ## Common Patterns
-- Server Actions in app/actions/ for mutations
-- OpenAI client in lib/ai/openai.ts
+- Server Actions split into two files:
+  - `app/actions/survey-crud.ts` - CRUD operations (getSurveys, getSurveyById, createSurvey)
+  - `app/actions/surveys.ts` - AI operations (generateSurveyQuestions, regenerateQuestion)
+- OpenAI client in lib/ai/openai.ts (server-only)
 - Prisma client singleton in lib/db/prisma.ts
 - AI prompts in lib/ai/prompts.ts
 
@@ -34,6 +36,9 @@ MVP - Week 1-2: Building core features
 - OpenAI model is "gpt-4o" (not gpt-4-turbo)
 - Password stored in ADMIN_PASSWORD env var (add to Vercel settings)
 - Next.js 15: params and searchParams are Promises, must await them in page components
+- **CRITICAL:** Keep Server Actions separate - CRUD actions in `survey-crud.ts`, AI actions in `surveys.ts`
+  - Public pages (survey form) should ONLY import from `survey-crud.ts` to avoid OpenAI bundling errors
+  - Admin pages can import from both files as needed
 
 ## OpenAI Usage Patterns
 - Model: "gpt-4o"

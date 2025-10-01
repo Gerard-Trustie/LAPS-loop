@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getSurveyById } from '@/app/actions/surveys';
+import { getSurveyById } from '@/app/actions/survey-crud';
 import CompletionDisplay from './CompletionDisplay';
 
 interface PageProps {

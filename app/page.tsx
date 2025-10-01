@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getSurveys } from './actions/surveys';
+import { getSurveys } from './actions/survey-crud';
 import { getResponseCount } from './actions/responses';
 
 export default async function Home() {
