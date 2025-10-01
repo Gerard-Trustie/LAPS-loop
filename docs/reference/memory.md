@@ -11,9 +11,9 @@ MVP - Week 1-2: Building core features
 - Simple password protection for admin routes (ADR-005)
 
 ## Current Working State
-**Status:** Milestone 5 completed - Public survey form working
-**Last Milestone:** Milestone 5 (public survey form)
-**Next Milestone:** Milestone 6 (response viewing & export)
+**Status:** Milestone 6 completed - Response viewing and CSV export working
+**Last Milestone:** Milestone 6 (response viewing & export)
+**Next Milestone:** Milestone 7 (pain analysis UI)
 
 ## Tables in Use
 - surveys (title, audience, hypothesis, questions, completion_code)

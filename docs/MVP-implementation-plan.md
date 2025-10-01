@@ -673,25 +673,25 @@ lapsloop/
 
 ### Tasks
 
-- [ ] **6.1: Add Response List Component**
+- [x] **6.1: Add Response List Component**
   - Create `components/ResponseList.tsx`
   - Shows responses with timestamps
   - Expandable to see answers
   - Commit: `ui: add response list component`
 
-- [ ] **6.2: Add to Survey Detail Page**
+- [x] **6.2: Add to Survey Detail Page**
   - Show response count
   - "View Responses" toggle
   - Integrate ResponseList component
   - Commit: `ui: integrate response list`
 
-- [ ] **6.3: Implement CSV Export**
+- [x] **6.3: Implement CSV Export**
   - Update exportResponsesCSV() action
   - Generate CSV with proper headers
   - Trigger download from browser
   - Commit: `feat: implement CSV export`
 
-- [ ] **6.4: Test Export**
+- [x] **6.4: Test Export**
   - Create test responses
   - Export to CSV
   - Open in Excel/Google Sheets
