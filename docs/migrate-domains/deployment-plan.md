@@ -115,8 +115,9 @@
 ## Phase 3: Review Infrastructure Code
 
 1.  **Gerard: Submit CDK Code for Review**
-    *   [ ] Push the CDK code to a feature branch and create a Pull Request.
-    *   [ ] **Notify Stephane:** "The CDK code for LAPSloop is ready for your review."
+    *   [x] Push the CDK code to a feature branch and create a Pull Request.
+        **PR #1:** https://github.com/Gerard-Trustie/LAPS-loop/pull/1
+    *   [x] **Notify Stephane:** "The CDK code for LAPSloop is ready for your review."
 
 2.  **Stephane: Review and Approve Infrastructure**
     *   [ ] Review the CDK code in Gerard's PR.
