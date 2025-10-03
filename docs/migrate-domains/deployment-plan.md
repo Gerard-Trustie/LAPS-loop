@@ -50,44 +50,45 @@
     *   [x] Verify AWS access with the new profile: `aws sts get-caller-identity --profile lapsloop-dev`
         **Account ID: 102438122711**
     *   [x] **Security:** Store the access keys securely (e.g., in 1Password). Never commit them to git.
-    *   [ ] In GoDaddy, navigate to the DNS settings for `shouldable.ai` and replace the existing nameservers with the four AWS NS records provided by Stephane.
-    *   [ ] **Notify Stephane:** "GoDaddy nameservers have been updated."
+    *   [x] In GoDaddy, navigate to the DNS settings for `shouldable.ai` and replace the existing nameservers with the four AWS NS records provided by Stephane.
+    *   [x] **Notify Stephane:** "GoDaddy nameservers have been updated."
 
 ---
 
 ## Phase 2: Environment Bootstrap & Infrastructure Development
 
 1.  **Gerard: Prepare CDK Environment & Bootstrap**
-    *   [ ] Verify AWS access: `aws sts get-caller-identity --profile lapsloop-dev`. Note the `AccountId` from the output - you'll need it for the bootstrap commands.
-    *   [ ] Create the `infrastructure/` workspace:
+    *   [x] Verify AWS access: `aws sts get-caller-identity --profile lapsloop-dev`. Note the `AccountId` from the output - you'll need it for the bootstrap commands.
+        **Account ID: 102438122711**
+    *   [x] Create the `infrastructure/` workspace:
         ```bash
         mkdir infrastructure
         cd infrastructure
         ```
-    *   [ ] Initialize a new CDK project:
+    *   [x] Initialize a new CDK project:
         ```bash
         npx cdk init app --language typescript
         ```
         This creates the necessary `cdk.json`, `package.json`, and project structure with `aws-cdk-lib` already installed.
-    *   [ ] **Note:** CDK v2 includes all AWS construct libraries in `aws-cdk-lib`. Import AWS services like:
+    *   [x] **Note:** CDK v2 includes all AWS construct libraries in `aws-cdk-lib`. Import AWS services like:
         ```typescript
         import * as lambda from 'aws-cdk-lib/aws-lambda';
         import * as rds from 'aws-cdk-lib/aws-rds';
         import * as ec2 from 'aws-cdk-lib/aws-ec2';
         ```
         No additional package installations are needed for standard AWS resources.
-    *   [ ] **Bootstrap CDK for both required regions.** Replace `ACCOUNT_ID` with the actual Account ID from step 1. This is a one-time setup per region.
+    *   [x] **Bootstrap CDK for both required regions.** Replace `ACCOUNT_ID` with the actual Account ID from step 1. This is a one-time setup per region.
         ```bash
-        npx cdk bootstrap aws://ACCOUNT_ID/eu-west-1 --profile lapsloop-dev
-        npx cdk bootstrap aws://ACCOUNT_ID/us-east-1 --profile lapsloop-dev
+        npx cdk bootstrap aws://102438122711/eu-west-1 --profile lapsloop-dev
+        npx cdk bootstrap aws://102438122711/us-east-1 --profile lapsloop-dev
         ```
-    *   [ ] **Return to repo root:**
+    *   [x] **Return to repo root:**
         ```bash
         cd ..
         ```
         The remaining steps assume you're at the repository root. Deployment commands in Phase 4 will explicitly `cd infrastructure` when needed.
 
-2.  **Gerard: Develop CDK Stacks**
+1.  **Gerard: Develop CDK Stacks**
     *   [ ] Develop the CDK stacks (`certificate-stack.ts`, `web-stack.ts`, etc.).
     *   [ ] **Crucially:** In `certificate-stack.ts`, do **not** create a new hosted zone. Instead, use `HostedZone.fromHostedZoneAttributes` or `HostedZone.fromLookup` to import the existing zone using the Hosted Zone ID: `Z07945003DLIAZQPS5184`. This makes the CDK aware of the manually-created zone without trying to recreate it.
         ```typescript
@@ -104,9 +105,10 @@
     *   [ ] **Certificate ARN Export:** Ensure `certificate-stack.ts` exports the Certificate ARN as a CloudFormation output for cross-region import by the main stack.
     *   [ ] **Verify DNS Validation:** Confirm that CDK is configured to automatically create DNS validation records in Route 53 for ACM certificate validation (this should happen automatically when using `HostedZone.fromLookup`).
 
-3.  **Both: Monitor DNS Propagation**
-    *   [ ] Periodically check that the nameserver change is live: `dig NS shouldable.ai`.
-    *   [ ] Once the command returns the AWS nameservers, the ACM certificate in the `certificate-stack` can be successfully validated.
+2.  **Both: Monitor DNS Propagation**
+    *   [x] Periodically check that the nameserver change is live: `dig NS shouldable.ai`.
+    *   [x] Once the command returns the AWS nameservers, the ACM certificate in the `certificate-stack` can be successfully validated.
+        **Confirmed:** All four AWS nameservers are active (ns-1289.awsdns-33.org, ns-1700.awsdns-20.co.uk, ns-152.awsdns-19.com, ns-814.awsdns-37.net)
 
 ---
 
