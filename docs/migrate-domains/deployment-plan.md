@@ -88,24 +88,24 @@
         ```
         The remaining steps assume you're at the repository root. Deployment commands in Phase 4 will explicitly `cd infrastructure` when needed.
 
-1.  **Gerard: Develop CDK Stacks**
-    *   [ ] Develop the CDK stacks (`certificate-stack.ts`, `web-stack.ts`, etc.).
-    *   [ ] **Crucially:** In `certificate-stack.ts`, do **not** create a new hosted zone. Instead, use `HostedZone.fromHostedZoneAttributes` or `HostedZone.fromLookup` to import the existing zone using the Hosted Zone ID: `Z07945003DLIAZQPS5184`. This makes the CDK aware of the manually-created zone without trying to recreate it.
+2.  **Gerard: Develop CDK Stacks**
+    *   [x] Develop the CDK stacks (`certificate-stack.ts`, `web-stack.ts`, etc.).
+    *   [x] **Crucially:** In `certificate-stack.ts`, do **not** create a new hosted zone. Instead, use `HostedZone.fromHostedZoneAttributes` or `HostedZone.fromLookup` to import the existing zone using the Hosted Zone ID: `Z07945003DLIAZQPS5184`. This makes the CDK aware of the manually-created zone without trying to recreate it.
         ```typescript
-        // Example:
+        // Implemented:
         const hostedZone = route53.HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
           hostedZoneId: 'Z07945003DLIAZQPS5184',
           zoneName: 'shouldable.ai',
         });
         ```
-    *   [ ] In `prisma/schema.prisma`, ensure `binaryTargets = ["native", "linux-musl-openssl-3.0.x"]` is set.
-    *   [ ] In `next.config.js`, ensure `output: "standalone"` is set.
-    *   [ ] **Configure DATABASE_URL:** In the CDK stack, set the Lambda `DATABASE_URL` environment variable in the format: `postgresql://username@proxy-endpoint:5432/database` (no password - IAM auth will be used).
-    *   [ ] **Implement IAM Token Generation:** In the Lambda handler code, implement runtime IAM token generation using `@aws-sdk/rds-signer` before initializing Prisma. The token must be generated fresh for each database connection.
-    *   [ ] **Certificate ARN Export:** Ensure `certificate-stack.ts` exports the Certificate ARN as a CloudFormation output for cross-region import by the main stack.
-    *   [ ] **Verify DNS Validation:** Confirm that CDK is configured to automatically create DNS validation records in Route 53 for ACM certificate validation (this should happen automatically when using `HostedZone.fromLookup`).
+    *   [x] In `prisma/schema.prisma`, ensure `binaryTargets = ["native", "linux-musl-openssl-3.0.x"]` is set.
+    *   [x] In `next.config.js`, ensure `output: "standalone"` is set.
+    *   [x] **Configure DATABASE_URL:** In the CDK stack, set the Lambda `DATABASE_URL` environment variable in the format: `postgresql://username@proxy-endpoint:5432/database` (no password - IAM auth will be used).
+    *   [ ] **Implement IAM Token Generation:** In the Lambda handler code, implement runtime IAM token generation using `@aws-sdk/rds-signer` before initializing Prisma. The token must be generated fresh for each database connection. *(To be implemented during Lambda function development)*
+    *   [x] **Certificate ARN Export:** Ensure `certificate-stack.ts` exports the Certificate ARN as a CloudFormation output for cross-region import by the main stack.
+    *   [x] **Verify DNS Validation:** Confirm that CDK is configured to automatically create DNS validation records in Route 53 for ACM certificate validation (this should happen automatically when using `HostedZone.fromLookup`).
 
-2.  **Both: Monitor DNS Propagation**
+3.  **Both: Monitor DNS Propagation**
     *   [x] Periodically check that the nameserver change is live: `dig NS shouldable.ai`.
     *   [x] Once the command returns the AWS nameservers, the ACM certificate in the `certificate-stack` can be successfully validated.
         **Confirmed:** All four AWS nameservers are active (ns-1289.awsdns-33.org, ns-1700.awsdns-20.co.uk, ns-152.awsdns-19.com, ns-814.awsdns-37.net)
